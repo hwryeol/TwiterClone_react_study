@@ -1,4 +1,5 @@
 import { dbService } from "myBase";
+import { storageService } from "myBase";
 import { useState } from "react";
 import React from "react";
 
@@ -9,9 +10,11 @@ const Tweet = ({ tweetObj, isOwner}) => {
 
     const onClickDelete = async () => {
         const ok = window.confirm("Are you sure you want to delete this tweet?");
-        console.log(ok)
         if(ok){
             await dbService.doc(`tweets/${tweetObj.id}`).delete()
+            if(tweetObj.attachmentUrl){
+                await storageService.refFromURL(tweetObj.attachmentUrl).delete();
+            }
         }};
     
     const onChange = (event) => {
@@ -32,7 +35,8 @@ const Tweet = ({ tweetObj, isOwner}) => {
     return (
     <div>
         <>
-        <h4>{tweetObj.text}</h4>
+        <h4 style={{display:"inline"}}>{tweetObj.text} </h4>
+        {Boolean(tweetObj.attachmentUrl) && <img src = {tweetObj.attachmentUrl} alt="pic" width="50px" height="50px"></img>}
         {editing? (
             <>
             <form onSubmit={onSubmit}>

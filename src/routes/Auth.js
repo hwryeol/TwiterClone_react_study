@@ -28,7 +28,7 @@ const Auth = () => {
             }
             console.log(data)
         }catch(error){
-            if(error.code == "auth/weak-password"){
+            if(error.code === "auth/weak-password"){
                 setError("The password is too weak.")
             } else if(error.code === "auth/email-already-in-use") {
                 setError("The Email is already in use")
@@ -50,7 +50,7 @@ const Auth = () => {
             } else if(name === "github") {
                 provider = new firebaseInstance.auth.GithubAuthProvider();
             }
-            const data = await authService.signInWithPopup(provider);
+            await authService.signInWithPopup(provider);
         }
     return (
     <div>

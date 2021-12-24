@@ -23,7 +23,7 @@ function App() {
   isLoggedIn={isLoggedIn}
   userObj={userObj}
   /> :"init..."}
-  <footer> &copy; Nwitter {new Date().getFullYear()}</footer>
+  <footer> &copy; twiter {new Date().getFullYear()}</footer>
   </>
   )
 }
