@@ -9,17 +9,6 @@ const Home = ({userObj}) => {
     const [tweets,setTweets] = useState([]);
     const [attachment,setAttachment] = useState("")
 
-    // const getTweets = async() => {
-    //     const dbTweets = await dbService.collection("tweets").get();
-    //     dbTweets.forEach(document => {
-    //         const tweetObject = {
-    //             ...document.data(),
-    //             id: document.id,
-    //             creatorId: userObj.uid
-    //         }
-    //         setTweets(prev => [tweetObject, ...prev])
-    //     })};
-
     useEffect(() => {
             dbService.collection("tweets").onSnapshot((snapshot) => {
                 const tweetArray = snapshot.docs.map((doc) => ({
