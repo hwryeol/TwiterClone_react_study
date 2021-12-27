@@ -6,18 +6,29 @@ import Profile from "routes/Profile";
 import Navigation from "components/Navigation";
 
 const AppRouter = ({isLoggedIn,userObj,refreshUser}) => {
+
+  const mystyle = () =>({
+    maxWidth: 890,
+    width: "100%",
+    margin: "0 auto",
+    marginTop: 80,
+    display: "flex",
+    justifyContent: "center",
+  })
+
   return (
     <Router>
-      {isLoggedIn && <Navigation userObj={userObj} />}
-      {console.log("bb")}
+      <>{isLoggedIn && <Navigation userObj={userObj} />}</>
       <Routes>
         {isLoggedIn ? (
           <>
-            <Route exact path="/" element={<Home userObj={userObj} /> }></Route>
-            <Route exact path="/profile" element={<Profile userObj={userObj} refreshUser={refreshUser} />}></Route>
+            <Route exact path="/" style={mystyle} element={<Home userObj={userObj} /> }></Route>
+            <Route exact path="/profile" style={mystyle} element={<Profile userObj={userObj} refreshUser={refreshUser} />}></Route>
           </>
         ):(
-          <Route exact path="/" element={<Auth />}/>
+          <>
+            <Route exact path="/" element={<Auth />}/>
+          </>
         )}
       </Routes>
     </Router>

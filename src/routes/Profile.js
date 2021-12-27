@@ -54,22 +54,29 @@ const Profile = ({userObj,refreshUser}) => {
 
 
     return (
-            <div>
-                <form onSubmit={onSubmit}>
-                    <input 
+            <div className="container">
+            <form onSubmit={onSubmit} className="profileForm">
+                <input 
                     onChange={onChange}
                     type="text"
                     placeholder="Display name"
                     value={newDisplayName}
-                    />
-                    <input type="submit" value="Update Profile" />
-                </form>
-
-                <button onClick={onLogOutClick}>Log Out</button>
-                {tweets.map((tweet) => (
-                    <Tweet key={tweet.id} tweetObj={tweet} isOwner={tweet.creatorId === userObj.uid} />
-                ))}
+                    autoFocus
+                    className="formInput"
+                />
+                <input
+                    type="submit"
+                    value="Update Profile"
+                    className="formBtn"
+                    style={{
+                        marginTop: 10,
+                    }}
+                />
+            </form>
+            <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>
+                Log Out
+            </span>
             </div>
-    )
+    );
 }
 export default Profile

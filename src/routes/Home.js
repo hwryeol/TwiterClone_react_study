@@ -23,12 +23,13 @@ const Home = ({userObj}) => {
 
 
     return (
-        <div>
+        <div className="container">
             <TweetFactory userObj={userObj}/>
-
+            <div style={{ marginTop: 30 }}>
             {tweets.map( (tweet) => (
                 <Tweet key={tweet.id} tweetObj={tweet} isOwner={tweet.creatorId === userObj.uid} />
             ))}
+            </div>
         </div>
     )
 }

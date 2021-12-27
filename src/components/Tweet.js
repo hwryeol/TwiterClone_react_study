@@ -2,6 +2,8 @@ import { dbService } from "myBase";
 import { storageService } from "myBase";
 import { useState } from "react";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 
 const Tweet = ({ tweetObj, isOwner}) => {
@@ -33,23 +35,32 @@ const Tweet = ({ tweetObj, isOwner}) => {
 
     
     return (
-    <div>
+        <div className="nweet">
         <>
         <h4 style={{display:"inline"}}>{tweetObj.text} </h4>
         {Boolean(tweetObj.attachmentUrl) && <img src = {tweetObj.attachmentUrl} alt="pic" width="50px" height="50px"></img>}
         {editing? (
             <>
-            <form onSubmit={onSubmit}>
-                <input onChange={onChange} type="text" placeholder="Edit tweet" value={newTweet} />
-                <input type="submit" value="Update" /> 
+             <form onSubmit={onSubmit} className="container nweetEdit">
+                <input onChange={onChange} type="text" placeholder="Edit tweet" value={newTweet} required autoFocus className="formInput" />
+                <input type="submit" value="Update tweet" className="formBtn" />
             </form>
-            <button onClick={toggleEditing}>Cancel</button>
+            <span onClick={toggleEditing} className="formBtn cancelBtn">
+            Cancel
+          </span>
             </>
             ):(<>
+                {tweetObj.attachmentUrl && <img src={tweetObj.attachmentUrl} />}
                 {isOwner ? (
                     <>
-                    <button onClick={onClickDelete}>Delete</button>
-                    <button onClick={toggleEditing}>Edit</button>
+                    <div class="nweet__actions">
+                        <span onClick={onClickDelete}>
+                            <FontAwesomeIcon icon={faTrash} />
+                        </span>
+                        <span onClick={toggleEditing}>
+                            <FontAwesomeIcon icon={faPencilAlt} />
+                        </span>
+                    </div>
                     </>
                 ):null}
                 </>)

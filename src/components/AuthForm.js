@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { authService} from "myBase";
 
+const inputStyles = {};
+
 const AuthForm = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("")
@@ -44,13 +46,14 @@ const AuthForm = () => {
 
     return (
         <div>
-            <form onSubmit={onSubmit}>
-                <input name="email" type="text" placeholder="Email" onChange={onChange} value={email} required></input>
-                <input name="password" type="password" placeholder="Password" onChange={onChange} value={password} required></input>
-                <input type="submit" value={newAccount?"create Account": "Login"}></input>
+            <form onSubmit={onSubmit} className="container">
+                <input name="email" type="text" placeholder="Email" onChange={onChange} value={email} className="authInput" required></input>
+                <input name="password" type="password" placeholder="Password" onChange={onChange} value={password} className="authInput" required></input>
+                <input type="submit" value={newAccount?"create Account": "Login" } className="authInput"></input>
+                {error && <span className="authError">{error}</span>}
             </form>
             <div>{error}</div>
-            <span onClick={toggleAccount}>
+            <span onClick={toggleAccount} className="authSwitch">
                 {newAccount ? "Sign In" : "Create Account"}
             </span>
         </div>
